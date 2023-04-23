@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  body {
+    @apply bg-gray-900 text-white;
+  }
+  .button {
+    @apply p-5 rounded-md w-[400px] bg-gray-600;
+  }
+}
