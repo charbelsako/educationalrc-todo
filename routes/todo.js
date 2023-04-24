@@ -46,7 +46,7 @@ router.delete('/:id', async (req, res) => {
     const item = await Item.findOneAndUpdate(
       {
         _id: id,
-        user: req.session.user._id,
+        user: req.user._id,
       },
       {
         isDeleted: true,
@@ -68,7 +68,7 @@ router.put('/:id', async (req, res) => {
     const { id } = req.params
     const params = req.body
     const item = await Item.findOneAndUpdate(
-      { _id: id, user: req.session.user._id },
+      { _id: id, user: req.user._id },
       { ...params },
       { new: true }
     )
