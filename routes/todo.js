@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const { requireLogin } = require('../middleware/auth')
+const passport = require('passport')
+const Item = require('../models/Item')
 
 router.use(requireLogin)
 
@@ -7,7 +9,7 @@ router.get('/', async (req, res) => {
   try {
     const { page, limit } = req.query
     const items = await Item.find({
-      user: req.session.user._id,
+      user: req.user._id,
       isDeleted: false,
     })
       .skip((page - 1) * limit)
@@ -29,7 +31,7 @@ router.post('/create', async (req, res) => {
   try {
     // TODO validate input
     const params = req.body
-    const item = new Item({ user: req.session.user._id, text: params.text })
+    const item = new Item({ user: req.user._id, text: params.text })
     await item.save()
     res.status(200).json({ message: 'Created item successfully', item })
   } catch (err) {

@@ -8,20 +8,34 @@ import NotFound from './components/NotFound'
 import SignUp from './components/SignUp'
 import Navbar from './components/Navbar'
 import Dashboard from './components/Dashboard'
+import PrivateRoute from './components/PrivateRoute'
+
+const user = localStorage.getItem('user')
+
+let isAuthenticated
+if (user) {
+  isAuthenticated = true
+} else {
+  isAuthenticated = false
+}
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute Component={Dashboard} isAuthenticated={isAuthenticated} />
+    ),
     errorElement: <NotFound />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
   },
   {
     path: '/signup',
     element: <SignUp />,
+  },
+  {
+    path: '/login',
+    element: (
+      <PrivateRoute Component={Login} isAuthenticated={isAuthenticated} />
+    ),
   },
 ])
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)

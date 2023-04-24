@@ -2,29 +2,46 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const session = require('express-session')
-
+const cors = require('cors')
 const app = express()
-
+const MongoStore = require('connect-mongo')
+const passport = require('passport')
 //models
 const Item = require('./models/Item')
 const User = require('./models/User')
+const passportLocal = require('./middleware/passport-local')
 
 // connect to database
 const mongoURI = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.xpjg6.mongodb.net/todo?retryWrites=true&w=majority`
-mongoose
+const connection = mongoose
   .connect(mongoURI)
   .then(() => console.log('Connected To mongodb'))
   .catch((err) => console.error(err))
+
+const store = new MongoStore({
+  mongoUrl: mongoURI,
+})
 
 app.use(
   session({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
+    store: store,
+    cookie: { secure: false, httpOnly: false },
+  })
+)
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:3000',
   })
 )
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 // routes
 const todoRouter = require('./routes/todo')

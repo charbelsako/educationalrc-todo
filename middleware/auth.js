@@ -1,5 +1,5 @@
 function requireLogin(req, res, next) {
-  if (req.session.user) {
+  if (req.isAuthenticated()) {
     next()
   } else {
     res.json({ message: 'Not authenticated!' })

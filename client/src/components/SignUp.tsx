@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-
-function signup() {
-  return false
-}
+import axios from 'axios'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -20,6 +17,16 @@ export default function Login() {
 
   function setPasswordConfirmInput(e: any) {
     setConfirmPassword(e.target.value)
+  }
+
+  async function signup(e: any) {
+    try {
+      e.preventDefault()
+      if (password !== confirmPassword) throw new Error("Passwords don't match")
+      await axios.post('http://localhost:5000/user/signup', { email, password })
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (

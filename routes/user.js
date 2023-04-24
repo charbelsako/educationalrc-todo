@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const bcrypt = require('bcrypt')
+const passport = require('passport')
 
 router.get('/current', async (req, res) => {
   res.json(req.session)
@@ -14,24 +15,9 @@ router.get('/logout', async (req, res) => {
   }
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', passport.authenticate('local'), async (req, res) => {
   try {
-    const params = req.body
-    // TODO validate input
-
-    const user = await User.findOne({ email: params.email })
-    if (!user) {
-      res.status(401).json({ message: 'Invalid Crendentials' })
-    }
-
-    const isMatch = await bcrypt.compare(params.password, user.password)
-    if (!isMatch) {
-      res.status(401).json({ message: 'Invalid Credentials' })
-    }
-
-    req.session.user = user
-
-    res.json({ message: 'Login Success' })
+    res.status(200).json({ message: 'Login Success' })
   } catch (err) {
     console.error(err)
   }
