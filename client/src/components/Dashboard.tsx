@@ -51,9 +51,10 @@ export default function Dashboard() {
           withCredentials: true,
         }
       )
-
-      const arr = [todos, todo.data]
+      console.log(todo.data)
+      const arr = [...todos, todo.data.item]
       setTodos(arr)
+      setText('')
     } catch (err) {
       console.error(err)
     }
@@ -101,7 +102,7 @@ export default function Dashboard() {
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-      <div className="flex items-end w-[600px]">
+      <div className="flex items-end w-[600px] mt-10">
         <p className="text-xs mr-auto">{numCompleted} Completed</p>
         <button
           className="bg-gray-300/40 text-black rounded-md p-2 flex items-center space-x-3"
@@ -118,6 +119,21 @@ export default function Dashboard() {
             </>
           )}
         </button>
+      </div>
+
+      <div className="flex w-[600px] flex-col items-start">
+        {todos.map((todo: any, index: number) => {
+          if (hidden && todo.done) return null
+          return (
+            <Todo
+              data={todo}
+              key={index}
+              deleteTodo={() => deleteTodo(todo._id)}
+              index={index}
+              toggleDone={() => markDone(todo._id, todo.done)}
+            />
+          )
+        })}
       </div>
       <form
         onSubmit={createTodo}
@@ -139,20 +155,6 @@ export default function Dashboard() {
           </button>
         </div>
       </form>
-      <div className="flex w-[600px] flex-col items-start">
-        {todos.map((todo: any, index: number) => {
-          if (hidden && todo.done) return null
-          return (
-            <Todo
-              data={todo}
-              key={index}
-              deleteTodo={() => deleteTodo(todo._id)}
-              index={index}
-              toggleDone={() => markDone(todo._id, todo.done)}
-            />
-          )
-        })}
-      </div>
     </div>
   )
 }
