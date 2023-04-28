@@ -27,7 +27,7 @@ export default function Dashboard() {
   useEffect(() => {
     // fetch all todos
     axios
-      .get(`${process.env.API}/todo?limit=10&page=1`, {
+      .get(`https://educationalrc-todo.vercel.app/todo?limit=10&page=1`, {
         withCredentials: true,
       })
       .then((data) => {
@@ -43,7 +43,7 @@ export default function Dashboard() {
     try {
       e.preventDefault()
       const todo = await axios.post(
-        `${process.env.API}/todo/create`,
+        `https://educationalrc-todo.vercel.app/todo/create`,
         {
           text,
         },
@@ -63,9 +63,12 @@ export default function Dashboard() {
   async function deleteTodo(id: String) {
     try {
       console.log('deleting ', id)
-      const result = await axios.delete(`${process.env.API}/todo/${id}`, {
-        withCredentials: true,
-      })
+      const result = await axios.delete(
+        `https://educationalrc-todo.vercel.app/todo/${id}`,
+        {
+          withCredentials: true,
+        }
+      )
       // delete from state
       console.log(result.data)
       setTodos(todos.filter((item: TodoType) => item._id !== id))
@@ -78,7 +81,7 @@ export default function Dashboard() {
     try {
       console.log('marking as done ', id)
       const result = await axios.put(
-        `${process.env.API}/todo/${id}`,
+        `https://educationalrc-todo.vercel.app/todo/${id}`,
         { done: !done },
         {
           withCredentials: true,

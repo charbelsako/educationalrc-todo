@@ -12,7 +12,7 @@ export default function Login() {
     console.log(email, password)
     try {
       const result = await axios.post(
-        `${process.env.API}/user/login`,
+        'https://educationalrc-todo.vercel.app/user/login',
         {
           username: email,
           password,
