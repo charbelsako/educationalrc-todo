@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
-import * as dotenv from 'dotenv'
-dotenv.config()
 
 export default function Login() {
   const [email, setEmail] = useState('')
