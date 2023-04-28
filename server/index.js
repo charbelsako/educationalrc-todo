@@ -44,7 +44,7 @@ app.use(
 //     origin: 'https://educationalrc-todo-1be3.vercel.app/',
 //   })
 // )
-app.use(cors())
+app.use(cors({ origin: '*' }))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
