@@ -21,6 +21,7 @@ export default function Login() {
 
   async function signup(e: any) {
     try {
+      console.log(process.env.API)
       e.preventDefault()
       if (password !== confirmPassword) throw new Error("Passwords don't match")
       await axios.post(`${process.env.API}/user/signup`, { email, password })
