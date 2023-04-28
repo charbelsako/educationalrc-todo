@@ -34,13 +34,13 @@ app.use(
 app.use(
   cors({
     credentials: true,
-    methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS'],
     origin: 'http://localhost:3000',
   })
 )
 app.use(
   cors({
     credentials: true,
+    methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS'],
     origin: 'https://educationalrc-todo-1be3.vercel.app/',
   })
 )
