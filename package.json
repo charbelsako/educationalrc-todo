@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "18.12.1"
+  },
   "scripts": {
     "client-install": "npm install --prefix client",
     "build": "npm install --prefix client && npm run build --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "client": "cd client && yarn run start",
     "dev": "concurrently \"yarn run start\"  \"yarn run client\""
   },
