@@ -37,6 +37,12 @@ app.use(
     origin: 'http://localhost:3000',
   })
 )
+app.use(
+  cors({
+    credentials: true,
+    origin: 'https://educationalrc-todo-1be3.vercel.app/',
+  })
+)
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
