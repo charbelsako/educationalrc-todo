@@ -37,13 +37,14 @@ app.use(
 //     origin: 'http://localhost:3000',
 //   })
 // )
-app.use(
-  cors({
-    credentials: true,
-    methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS'],
-    origin: 'https://educationalrc-todo-1be3.vercel.app/',
-  })
-)
+// app.use(
+//   cors({
+//     credentials: true,
+//     methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS'],
+//     origin: 'https://educationalrc-todo-1be3.vercel.app/',
+//   })
+// )
+app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
