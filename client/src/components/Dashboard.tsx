@@ -27,7 +27,7 @@ export default function Dashboard() {
   useEffect(() => {
     // fetch all todos
     axios
-      .get('http://localhost:5000/todo?limit=10&page=1', {
+      .get('/todo?limit=10&page=1', {
         withCredentials: true,
       })
       .then((data) => {
@@ -43,7 +43,7 @@ export default function Dashboard() {
     try {
       e.preventDefault()
       const todo = await axios.post(
-        'http://localhost:5000/todo/create',
+        '/todo/create',
         {
           text,
         },
@@ -63,7 +63,7 @@ export default function Dashboard() {
   async function deleteTodo(id: String) {
     try {
       console.log('deleting ', id)
-      const result = await axios.delete(`http://localhost:5000/todo/${id}`, {
+      const result = await axios.delete(`/todo/${id}`, {
         withCredentials: true,
       })
       // delete from state
@@ -78,7 +78,7 @@ export default function Dashboard() {
     try {
       console.log('marking as done ', id)
       const result = await axios.put(
-        `http://localhost:5000/todo/${id}`,
+        `/todo/${id}`,
         { done: !done },
         {
           withCredentials: true,

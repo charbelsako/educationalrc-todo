@@ -23,7 +23,7 @@ export default function Login() {
     try {
       e.preventDefault()
       if (password !== confirmPassword) throw new Error("Passwords don't match")
-      await axios.post('http://localhost:5000/user/signup', { email, password })
+      await axios.post('/user/signup', { email, password })
     } catch (err) {
       console.error(err)
     }
