@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -23,7 +25,7 @@ export default function Login() {
     try {
       e.preventDefault()
       if (password !== confirmPassword) throw new Error("Passwords don't match")
-      await axios.post('/user/signup', { email, password })
+      await axios.post(`${process.env.API}/user/signup`, { email, password })
     } catch (err) {
       console.error(err)
     }

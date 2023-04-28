@@ -12,7 +12,7 @@ export default function Login() {
     console.log(email, password)
     try {
       const result = await axios.post(
-        'http://localhost:5000/user/login',
+        `${process.env.API}/user/login`,
         {
           username: email,
           password,

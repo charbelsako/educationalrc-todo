@@ -27,7 +27,7 @@ export default function Dashboard() {
   useEffect(() => {
     // fetch all todos
     axios
-      .get('/todo?limit=10&page=1', {
+      .get(`${process.env.API}/todo?limit=10&page=1`, {
         withCredentials: true,
       })
       .then((data) => {
@@ -43,7 +43,7 @@ export default function Dashboard() {
     try {
       e.preventDefault()
       const todo = await axios.post(
-        '/todo/create',
+        `${process.env.API}/todo/create`,
         {
           text,
         },
@@ -63,7 +63,7 @@ export default function Dashboard() {
   async function deleteTodo(id: String) {
     try {
       console.log('deleting ', id)
-      const result = await axios.delete(`/todo/${id}`, {
+      const result = await axios.delete(`${process.env.API}/todo/${id}`, {
         withCredentials: true,
       })
       // delete from state
@@ -78,7 +78,7 @@ export default function Dashboard() {
     try {
       console.log('marking as done ', id)
       const result = await axios.put(
-        `/todo/${id}`,
+        `${process.env.API}/todo/${id}`,
         { done: !done },
         {
           withCredentials: true,
